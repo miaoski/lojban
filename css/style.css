@@ -288,6 +288,12 @@ li {
   font-family: var(--font-mono);
 }
 
+.exercise-prompt .english-hint {
+  font-family: var(--font-sans);
+  font-style: italic;
+  color: var(--text-muted);
+}
+
 .exercise-input-row {
   display: flex;
   gap: var(--space-2);

@@ -156,6 +156,11 @@
   function stripBackticks(str) {
     return str.replace(/`/g, "");
   }
+  function formatPrompt(str) {
+    let formatted = str.replace(/`/g, "");
+    formatted = formatted.replace(/\(([^)]+)\)/g, '<span class="english-hint">($1)</span>');
+    return formatted;
+  }
   function normalize(str) {
     return str.toLowerCase().trim().replace(/`/g, "").replace(/\s+/g, " ").replace(/\s*,\s*/g, ", ").replace(/^\.+|\.+$/g, "").replace(/\./g, "");
   }
@@ -172,7 +177,7 @@
     div.dataset.index = index;
     const prompt = document.createElement("div");
     prompt.className = "exercise-prompt";
-    prompt.textContent = item.prompt || item.text;
+    prompt.innerHTML = formatPrompt(item.prompt || item.text);
     div.appendChild(prompt);
     const inputRow = document.createElement("div");
     inputRow.className = "exercise-input-row";
@@ -233,7 +238,7 @@
     div.className = "exercise-item";
     const prompt = document.createElement("div");
     prompt.className = "exercise-prompt";
-    prompt.textContent = item.prompt || item.text;
+    prompt.innerHTML = formatPrompt(item.prompt || item.text);
     div.appendChild(prompt);
     if (item.answer) {
       const revealBtn = document.createElement("button");
@@ -242,7 +247,7 @@
       div.appendChild(revealBtn);
       const answer = document.createElement("div");
       answer.className = "revealed-answer hidden";
-      answer.textContent = item.answer;
+      answer.textContent = stripBackticks(item.answer);
       div.appendChild(answer);
       revealBtn.addEventListener("click", () => {
         answer.classList.remove("hidden");
