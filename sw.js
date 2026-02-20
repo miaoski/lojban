@@ -4,11 +4,11 @@ const CACHE_NAME = 'lojban-v1';
 
 // Assets to cache on install
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/app.js',
-  '/css/style.css',
-  '/manifest.json',
+  './',
+  './index.html',
+  './app.js',
+  './css/style.css',
+  './manifest.json',
 ];
 
 // Generate lesson URLs
@@ -16,7 +16,7 @@ const LESSON_URLS = [];
 for (let week = 1; week <= 30; week++) {
   for (let day = 1; day <= 7; day++) {
     const id = `w${String(week).padStart(2, '0')}d${day}`;
-    LESSON_URLS.push(`/lessons/${id}.json`);
+    LESSON_URLS.push(`./lessons/${id}.json`);
   }
 }
 

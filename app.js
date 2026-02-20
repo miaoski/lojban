@@ -548,7 +548,7 @@
     prevBtn.addEventListener("click", handlePrev);
     nextBtn.addEventListener("click", handleNext);
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js").then((reg) => console.log("SW registered")).catch((err) => console.log("SW registration failed:", err));
+      navigator.serviceWorker.register("./sw.js").then((reg) => console.log("SW registered")).catch((err) => console.log("SW registration failed:", err));
     }
   }
   async function handleRoute(route) {
@@ -585,7 +585,7 @@
   }
   async function showLesson(lessonId2) {
     try {
-      const response = await fetch(`/lessons/${lessonId2}.json`);
+      const response = await fetch(`./lessons/${lessonId2}.json`);
       if (!response.ok)
         throw new Error("Lesson not found");
       const lesson = await response.json();
