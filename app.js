@@ -424,11 +424,6 @@
         break;
       case "summary":
         div.innerHTML = `<h2>Summary</h2>${section.content}`;
-        if (section.tomorrow) {
-          const preview = document.createElement("p");
-          preview.innerHTML = `<strong>Tomorrow:</strong> ${section.tomorrow}`;
-          div.appendChild(preview);
-        }
         break;
       default:
         if (section.title) {

@@ -208,6 +208,13 @@ pre {
   line-height: 1.5;
 }
 
+pre code {
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  font-size: inherit;
+}
+
 /* === Tables === */
 .table-wrapper {
   overflow-x: auto;
