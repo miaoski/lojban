@@ -169,7 +169,7 @@
     div.dataset.index = index;
     const prompt = document.createElement("div");
     prompt.className = "exercise-prompt";
-    prompt.textContent = item.prompt;
+    prompt.textContent = item.prompt || item.text;
     div.appendChild(prompt);
     const inputRow = document.createElement("div");
     inputRow.className = "exercise-input-row";
@@ -229,7 +229,7 @@
     div.className = "exercise-item";
     const prompt = document.createElement("div");
     prompt.className = "exercise-prompt";
-    prompt.textContent = item.prompt;
+    prompt.textContent = item.prompt || item.text;
     div.appendChild(prompt);
     if (item.answer) {
       const revealBtn = document.createElement("button");
@@ -250,7 +250,7 @@
   function createMatching(items, lessonId2) {
     const container = document.createElement("div");
     container.className = "matching-container";
-    const leftItems = items.map((item, i) => ({ text: item.prompt, index: i }));
+    const leftItems = items.map((item, i) => ({ text: item.prompt || item.text, index: i }));
     const rightItems = items.map((item, i) => ({ text: item.answer, index: i }));
     shuffleArray(rightItems);
     const leftCol = document.createElement("div");
@@ -399,7 +399,7 @@
         if (section.prompts && section.prompts.length > 0) {
           section.prompts.forEach((prompt, i) => {
             const item = createReveal(
-              { prompt: prompt.prompt, answer: prompt.answer },
+              { prompt: prompt.prompt || prompt.text, answer: prompt.answer },
               `conv-${i}`
             );
             div.appendChild(item);
