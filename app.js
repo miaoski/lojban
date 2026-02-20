@@ -153,8 +153,11 @@
   }
 
   // src/js/exercises.js
+  function stripBackticks(str) {
+    return str.replace(/`/g, "");
+  }
   function normalize(str) {
-    return str.toLowerCase().trim().replace(/\s+/g, " ").replace(/\s*,\s*/g, ", ").replace(/^\.+|\.+$/g, "").replace(/\./g, "");
+    return str.toLowerCase().trim().replace(/`/g, "").replace(/\s+/g, " ").replace(/\s*,\s*/g, ", ").replace(/^\.+|\.+$/g, "").replace(/\./g, "");
   }
   function checkAnswer(userAnswer, correctAnswer) {
     const normalizedUser = normalize(userAnswer);
@@ -190,12 +193,12 @@
     div.appendChild(feedback);
     const savedState = getExerciseState(lessonId2)[`ex${index}`];
     if (savedState?.answered) {
-      input.value = savedState.correct ? item.answer : "";
+      input.value = savedState.correct ? stripBackticks(item.answer) : "";
       input.disabled = true;
       checkBtn.disabled = true;
       input.classList.add(savedState.correct ? "correct" : "incorrect");
       if (!savedState.correct) {
-        feedback.textContent = `Correct answer: ${item.answer}`;
+        feedback.textContent = `Correct answer: ${stripBackticks(item.answer)}`;
         feedback.classList.remove("hidden");
         feedback.classList.add("incorrect");
       }
@@ -211,7 +214,8 @@
         feedback.classList.add("correct");
       } else {
         input.classList.add("incorrect");
-        feedback.textContent = `\u2717 Correct answer: ${Array.isArray(item.answer) ? item.answer[0] : item.answer}`;
+        const displayAnswer = Array.isArray(item.answer) ? item.answer[0] : item.answer;
+        feedback.textContent = `\u2717 Correct answer: ${stripBackticks(displayAnswer)}`;
         feedback.classList.add("incorrect");
       }
       feedback.classList.remove("hidden");
